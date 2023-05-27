@@ -54,7 +54,7 @@ public class CustomerWebController {
 
     @GetMapping
     public String index() {
-        return "/customer/index.html";
+        return "customer/index.html";
     }
 
 //    @RequestMapping(value = "/data_for_datatable", method = RequestMethod.GET, produces = "application/json")
@@ -236,7 +236,7 @@ public class CustomerWebController {
 
         model.addAttribute("requestInstance", requestInstance);
 
-        return "/customer/edit.html";
+        return "customer/edit.html";
     }
 
 //    @PostMapping("/update")
@@ -269,7 +269,7 @@ public class CustomerWebController {
             else
                 atts.addFlashAttribute("message", "Не удалось обновить заявку");
 
-            return "redirect:/customer/";
+            return "redirect:customer/";
         }
     }
 
@@ -284,7 +284,7 @@ public class CustomerWebController {
     public String create(Model model)
     {
         model.addAttribute("requestDto", new RequestDto());
-        return "/customer/create.html";
+        return "customer/create.html";
     }
 
 //    @PostMapping("/save")
@@ -310,7 +310,7 @@ public class CustomerWebController {
                        Model model,
                        RedirectAttributes atts) {
         if (bindingResult.hasErrors()) {
-            return "/customer/create.html";
+            return "customer/create.html";
         } else {
             Request request = new Request();
             request.setName(requestDto.getName());
@@ -326,7 +326,7 @@ public class CustomerWebController {
             else
                 atts.addFlashAttribute("message", "Ошибка создания заявки");
 
-            return "redirect:/customer/";
+            return "redirect:customer/";
         }
     }
 
@@ -352,7 +352,7 @@ public class CustomerWebController {
 
         atts.addFlashAttribute("message", "Заявка удалена");
 
-        return "redirect:/customer/";
+        return "redirect:customer/";
     }
 
 }
