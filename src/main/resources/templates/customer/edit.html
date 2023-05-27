@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-    <title>Simple CRM - Customer Management made Simple</title>
+    <title>Call-центр</title>
 
     <link href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.3/css/bootstrap.css" rel="stylesheet"
           crossorigin="anonymous">
@@ -11,18 +11,18 @@
 <nav class="navbar navbar-dark bg-dark fixed-top">
     <div class="container">
         <div class="navbar-header">
-            <a class="navbar-brand" href="/">Simple CRM</a>
+            <a class="navbar-brand" href="/">Call-центр</a>
         </div>
     </div>
 </nav>
 <div class="container" style="margin-top:80px">
 
     <h1 class="pb-2 border-bottom row">
-        <span class="col-sm-6 pb-4">Customer: <span th:text="${customerInstance.id}"></span> </span>
+        <span class="col-sm-6 pb-4">Заявка №: <span th:text="${requestInstance.id}"></span> </span>
         <span class="col-sm-6 text-sm-right pb-4">
-            <form action="/customer/delete" method="post" onsubmit="return confirm('Are you sure?');">
-                <input type="hidden" name="id" th:value="${customerInstance.id}"/>
-                <button class="btn btn-danger btn-outline-danger d-block d-sm-inline-block">Delete Customer</button>
+            <form action="/customer/delete" th:action="@{/customer/delete}" method="post" onsubmit="return confirm('Вы уверены?');">
+                <input type="hidden" name="id" th:value="${requestInstance.id}"/>
+                <button class="btn btn-danger btn-outline-danger d-block d-sm-inline-block">Удалить заявку</button>
             </form>
         </span>
     </h1>
@@ -30,7 +30,7 @@
 
     <div class="mt-5 card card-body bg-light">
 
-        <form action="/customer/update" th:object="${customerInstance}" class="form" method="post">
+        <form action="/customer/update" th:action="@{/customer/update}" th:object="${requestInstance}" class="form" method="post">
 
             <div class="alert alert-danger" th:if="${! #fields.errors('all').isEmpty()}">
                 <li th:each="e : ${#fields.detailedErrors()}" th:class="${e.global}? globalerr : fielderr">
@@ -39,51 +39,89 @@
                 </li>
             </div>
 
-            <input name="id" type="hidden" th:value="${customerInstance.id}"/>
+            <input name="id" type="hidden" th:value="${requestInstance.id}"/>
+            <input name="startDate" type="hidden" th:value="${requestInstance.startDate}"/>
 
             <div class="row">
                 <div class="form-group col-6">
-                    <label>First Name</label>
-                    <input class="form-control" name="firstName" th:value="${customerInstance?.firstName}"/>
+                    <label>Заголовок</label>
+                    <input class="form-control" name="name" th:value="${requestInstance?.name}"/>
                 </div>
                 <div class="form-group col-6">
-                    <label>Last Name</label>
-                    <input class="form-control" name="lastName" th:value="${customerInstance?.lastName}"/>
-                </div>
-            </div>
-
-            <div class="row">
-                <div class="form-group col-6">
-                    <label>Email Address</label>
-                    <input class="form-control" name="emailAddress" th:value="${customerInstance?.emailAddress}"/>
+                    <label>Тип заявки</label>
+                    <select class="form-control" name="type" th:value="${requestInstance?.type}">
+                        <option disabled>Выберите тип заявки</option>
+                        <option th:value="Оператор" th:selected="${requestInstance.type eq 'Оператор'}">Оператор</option>
+                        <option th:value="Банк" th:selected="${requestInstance.type eq 'Банк'}">Банк</option>
+                    </select>
+<!--                    <input class="form-control" name="type" th:value="${requestInstance?.type}"/>-->
                 </div>
                 <div class="form-group col-6">
-                    <label>Phone Number</label>
-                    <input class="form-control" name="phoneNumber" th:value="${customerInstance?.phoneNumber}"/>
+                    <label>Статус</label>
+                    <select class="form-control" name="status" th:value="${requestInstance?.status}">
+                        <option disabled>Выберите статус заявки</option>
+                        <option th:value="Зарегистрирована" th:selected="${requestInstance.status eq 'Зарегистрирована'}">Зарегистрирована</option>
+                        <option th:selected="${requestInstance.status eq 'В обработке'}">В обработке</option>
+                        <option th:value="Выполнена" th:selected="${requestInstance.status eq 'Выполнена'}">Выполнена</option>
+                    </select>
+<!--                    <input class="form-control" name="status" th:value="${requestInstance?.status}"/>-->
+                </div>
+                <div class="form-group col-6">
+                    <label>Оценка</label>
+                    <select class="form-control" name="grade" th:value="${requestInstance?.grade}">
+                        <option disabled>Выберите оценку</option>
+                        <option th:value="2" th:selected="${requestInstance.grade eq '2'}">2</option>
+                        <option th:value="3" th:selected="${requestInstance.grade eq '3'}">3</option>
+                        <option th:value="4" th:selected="${requestInstance.grade eq '4'}">4</option>
+                        <option th:value="5" th:selected="${requestInstance.grade eq '5'}">5</option>
+                    </select>
+<!--                    <input class="form-control" name="grade" th:value="${requestInstance?.grade}"/>-->
                 </div>
             </div>
 
             <div class="row">
                 <div class="form-group col">
-                    <label>Address</label>
-                    <input class="form-control" name="address" th:value="${customerInstance?.address}"/>
+                    <label>Описание</label>
+                    <input class="form-control" name="description" th:value="${requestInstance?.description}"></input>
                 </div>
             </div>
 
             <div class="row">
                 <div class="form-group col-6">
-                    <label>City</label>
-                    <input class="form-control" name="city" th:value="${customerInstance?.city}"/>
+                    <label>ФИО</label>
+                    <input class="form-control" name="fullName" th:value="${requestInstance?.fullName}"/>
                 </div>
                 <div class="form-group col-6">
-                    <label>Country</label>
-                    <input class="form-control" name="country" th:value="${customerInstance?.country}"/>
+                    <label>Email</label>
+                    <input class="form-control" name="emailAddress" th:value="${requestInstance?.emailAddress}"/>
+                </div>
+                <div class="form-group col-6">
+                    <label>Телефон</label>
+                    <input class="form-control" name="phoneNumber" th:value="${requestInstance?.phoneNumber}"/>
                 </div>
             </div>
+
+<!--            <div class="row">-->
+<!--                <div class="form-group col">-->
+<!--                    <label>Address</label>-->
+<!--                    <input class="form-control" name="address" th:value="${requestInstance?.address}"/>-->
+<!--                </div>-->
+<!--            </div>-->
+
+<!--            <div class="row">-->
+<!--                <div class="form-group col-6">-->
+<!--                    <label>City</label>-->
+<!--                    <input class="form-control" name="city" th:value="${requestInstance?.city}"/>-->
+<!--                </div>-->
+<!--                <div class="form-group col-6">-->
+<!--                    <label>Country</label>-->
+<!--                    <input class="form-control" name="country" th:value="${requestInstance?.country}"/>-->
+<!--                </div>-->
+<!--            </div>-->
 
             <div class="row">
                 <div class="col">
-                    <button type="submit" class="btn btn-success btn-block">Save Changes</button>
+                    <button type="submit" class="btn btn-success btn-block">Сохранить изменения</button>
                 </div>
             </div>
         </form>
@@ -96,7 +134,7 @@
             <div class="col-md-4">
                 <p class="text-center text-muted">&copy;
                     <span th:text="${#dates.format(#dates.createNow(), 'yyyy')}"></span>
-                    <a href="https://tucanoo.com">Tucanoo Solutions Ltd.</a>
+                    <a>Call-центр.</a>
                 </p>
             </div>
         </div>

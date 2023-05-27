@@ -1,22 +1,22 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-    <title>Simple CRM - Customer Management made Simple</title>
+    <title>Call-центр</title>
 </head>
 <body>
 <nav class="navbar navbar-dark bg-dark fixed-top">
     <div class="container">
         <div class="navbar-header">
-            <a class="navbar-brand" href="/">Simple CRM</a>
+            <a class="navbar-brand" href="/">Call-центр</a>
         </div>
     </div>
 </nav>
 <div class="container" style="margin-top:80px">
     <div>
-        <h1>Welcome to simple crm</h1>
-        <h2>Customer Management made Simple</h2>
+        <h1>Добро пожаловать</h1>
+        <h2>Система обработки заявок</h2>
     </div>
-    <p class="mt-5"><a href="/customer" class="btn btn-primary btn-block">Manage Customers</a></p>
+    <p class="mt-5"><a href="/customer" class="btn btn-primary btn-block">Открыть заявки</a></p>
 </div>
 <footer class="footer navbar-dark bg-dark fixed-bottom">
     <div class="container">
@@ -25,7 +25,7 @@
             <div class="col-md-4">
                 <p class="text-center text-muted">&copy;
                     <span th:text="${#dates.format(#dates.createNow(), 'yyyy')}"></span>
-                    <a href="https://tucanoo.com">Tucanoo Solutions Ltd.</a>
+                    <a>Call-центр.</a>
                 </p>
             </div>
         </div>

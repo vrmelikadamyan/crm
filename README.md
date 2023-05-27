@@ -1,10 +1,10 @@
 # Spring Boot CRM  
 
-> A simple customer management system built in spring boot to
+> A simple user management system built in spring boot to
 > demonstrate basic CRUD operations.
 
     
-Database: In memory H2 with 1000 records of fictitious customer data loaded at runtime.  
+Database: In memory H2 with 1000 records of fictitious user data loaded at runtime.  
   
 UI based on Twitter Bootstrap.  
   
