@@ -6,7 +6,7 @@ plugins {
 
 group = 'com.tucanoo'
 version = '1.0.0'
-sourceCompatibility = '15'
+sourceCompatibility = '11'
 
 configurations {
     developmentOnly
