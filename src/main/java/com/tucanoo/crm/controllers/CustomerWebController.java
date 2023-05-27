@@ -269,7 +269,7 @@ public class CustomerWebController {
             else
                 atts.addFlashAttribute("message", "Не удалось обновить заявку");
 
-            return "redirect:customer/";
+            return "redirect:customer";
         }
     }
 
@@ -326,7 +326,7 @@ public class CustomerWebController {
             else
                 atts.addFlashAttribute("message", "Ошибка создания заявки");
 
-            return "redirect:customer/";
+            return "redirect:customer";
         }
     }
 
@@ -352,7 +352,7 @@ public class CustomerWebController {
 
         atts.addFlashAttribute("message", "Заявка удалена");
 
-        return "redirect:customer/";
+        return "redirect:customer";
     }
 
 }
