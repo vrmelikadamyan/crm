@@ -1,4 +1,4 @@
-CREATE TABLE USER
+CREATE TABLE if not exists USER
 (
     id            BIGINT AUTO_INCREMENT PRIMARY KEY,
 --     first_name    VARCHAR(64),
@@ -12,7 +12,7 @@ CREATE TABLE USER
     phone_number  VARCHAR(24)
 );
 
-CREATE TABLE REQUEST
+CREATE TABLE if not exists REQUEST
 (
     id            BIGINT AUTO_INCREMENT PRIMARY KEY,
     name          VARCHAR(100),
