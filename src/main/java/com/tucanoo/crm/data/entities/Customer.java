@@ -16,6 +16,9 @@ public class Customer {
     Long id;
 
     @Column
+    String username;
+
+    @Column
     String fullName;
 //    @Column
 //    @NotBlank
