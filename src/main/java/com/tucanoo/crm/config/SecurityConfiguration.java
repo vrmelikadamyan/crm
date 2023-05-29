@@ -1,5 +1,7 @@
 package com.tucanoo.crm.config;
 
+import com.tucanoo.crm.data.dto.UserInfo;
+import java.util.Locale;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -13,6 +15,8 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.provisioning.InMemoryUserDetailsManager;
 import org.springframework.security.web.SecurityFilterChain;
+import org.springframework.web.servlet.LocaleResolver;
+import org.springframework.web.servlet.i18n.SessionLocaleResolver;
 
 @Configuration
 @EnableWebSecurity
@@ -36,19 +40,23 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 
     @Bean
     public InMemoryUserDetailsManager userDetailsService() {
-        UserDetails user1 = User.withUsername("user")
-                .password(passwordEncoder().encode("pass"))
-                .roles("USER")
-                .build();
-        UserDetails user2 = User.withUsername("user2")
-                .password(passwordEncoder().encode("user2Pass"))
-                .roles("USER")
-                .build();
-        UserDetails admin = User.withUsername("admin")
-                .password(passwordEncoder().encode("adminPass"))
-                .roles("ADMIN")
-                .build();
-        return new InMemoryUserDetailsManager(user1, user2, admin);
+//        UserDetails user1 = User.withUsername("user")
+//                .password(passwordEncoder().encode("pass"))
+//                .roles("USER")
+//                .build();
+//        UserDetails user2 = User.withUsername("user2")
+//                .password(passwordEncoder().encode("user2Pass"))
+//                .roles("USER")
+//                .build();
+//        UserDetails admin = User.withUsername("admin")
+//                .password(passwordEncoder().encode("adminPass"))
+//                .roles("ADMIN")
+//                .build();
+
+        UserInfo user1 = new UserInfo("user", "Дмитрий", "Кабанов",  "ROLE_USER", "pass", passwordEncoder());
+        UserInfo user2 = new UserInfo("user2", "Дмитрий", "Кабанов",  "ROLE_ADMIN", "pass", passwordEncoder());
+//        return new InMemoryUserDetailsManager(user1, user2, admin);
+        return new InMemoryUserDetailsManager(user1, user2);
     }
 
     @Bean
@@ -70,6 +78,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 //                .successForwardUrl("/index")
                 .and()
                 .logout()
+                .logoutUrl("/logout")
                 .permitAll();
     }
 }

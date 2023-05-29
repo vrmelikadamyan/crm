@@ -3,6 +3,7 @@ package com.tucanoo.crm.controllers;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.tucanoo.crm.data.dto.RequestDto;
+import com.tucanoo.crm.data.dto.UserInfo;
 import com.tucanoo.crm.data.entities.Customer;
 import com.tucanoo.crm.data.entities.Request;
 import com.tucanoo.crm.data.repositories.CustomerRepository;
@@ -16,6 +17,8 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.userdetails.User;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -53,7 +56,10 @@ public class CustomerWebController {
 
 
     @GetMapping
-    public String index() {
+    public String index(Model model, Authentication authentication) {
+        User userInfo = (User) authentication.getPrincipal();
+        Customer byUsername = customerRepository.findByUsername(userInfo.getUsername());
+        model.addAttribute("fullNameUser", byUsername.getFullName());
         return "customer/index.html";
     }
 
@@ -231,7 +237,11 @@ public class CustomerWebController {
 //    }
 
     @GetMapping("/edit/{id}")
-    public String edit(@PathVariable String id, Model model) {
+    public String edit(@PathVariable String id, Model model, Authentication authentication) {
+        User userInfo = (User) authentication.getPrincipal();
+        Customer byUsername = customerRepository.findByUsername(userInfo.getUsername());
+        model.addAttribute("fullNameUser", byUsername.getFullName());
+
         Request requestInstance = requestRepository.findById(Long.valueOf(id)).get();
 
         model.addAttribute("requestInstance", requestInstance);
@@ -260,7 +270,11 @@ public class CustomerWebController {
     public String update(@Valid @ModelAttribute("requestInstance") Request requestInstance,
                          BindingResult bindingResult,
                          Model model,
+                         Authentication authentication,
                          RedirectAttributes atts) {
+        User userInfo = (User) authentication.getPrincipal();
+        Customer byUsername = customerRepository.findByUsername(userInfo.getUsername());
+        model.addAttribute("fullNameUser", byUsername.getFullName());
         if (bindingResult.hasErrors()) {
             return "/customer/edit.html";
         } else {
@@ -282,8 +296,12 @@ public class CustomerWebController {
 //    }
 
     @GetMapping("/create")
-    public String create(Model model)
+    public String create(Model model, Authentication authentication)
     {
+        User userInfo = (User) authentication.getPrincipal();
+        Customer byUsername = customerRepository.findByUsername(userInfo.getUsername());
+        model.addAttribute("fullNameUser", byUsername.getFullName());
+
         model.addAttribute("requestDto", new RequestDto());
         return "customer/create.html";
     }

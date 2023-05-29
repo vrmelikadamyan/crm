@@ -38,10 +38,10 @@ public class RequestDatatableFilter implements org.springframework.data.jpa.doma
             predicates.add(criteriaBuilder.like(criteriaBuilder.lower(root.get("name")), '%' + userQuery + '%'));
             predicates.add(criteriaBuilder.like(criteriaBuilder.lower(root.get("description")), '%' + userQuery + '%'));
 //            predicates.add(criteriaBuilder.like(criteriaBuilder.lower(root.get("status")), '%' + userQuery + '%'));
-            predicates.add(criteriaBuilder.like(criteriaBuilder.lower(join.get("phoneNumber")), '%' + userQuery + '%'));
+            predicates.add(criteriaBuilder.like(criteriaBuilder.lower(root.get("phoneNumber")), '%' + userQuery + '%'));
 //            predicates.add(criteriaBuilder.like(criteriaBuilder.lower(join.get("firstName")), '%' + userQuery + '%'));
 //            predicates.add(criteriaBuilder.like(criteriaBuilder.lower(join.get("lastName")), '%' + userQuery + '%'));
-            predicates.add(criteriaBuilder.like(criteriaBuilder.lower(join.get("fullName")), '%' + userQuery + '%'));
+            predicates.add(criteriaBuilder.like(criteriaBuilder.lower(root.get("fullName")), '%' + userQuery + '%'));
 //            predicates.add(criteriaBuilder.like(root.get("startDate"), '%' + userQuery + '%'));
 //            predicates.add(criteriaBuilder.like(root.get("endDate"), '%' + userQuery + '%'));
 //            predicates.add(criteriaBuilder.like(root.get("grade"), '%' + userQuery + '%'));
