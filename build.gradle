@@ -2,6 +2,16 @@ plugins {
     id 'org.springframework.boot' version '2.3.3.RELEASE'
     id 'io.spring.dependency-management' version '1.0.9.RELEASE'
     id 'java'
+    id 'application'
+}
+
+application {
+    applicationDefaultJvmArgs = ['-Dfile.encoding=UTF-8']
+}
+
+run {
+    // Добавление аргумента для jvm
+    jvmArgs = ['-Dfile.encoding=UTF-8']
 }
 
 group = 'com.tucanoo'
