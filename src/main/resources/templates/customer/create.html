@@ -20,7 +20,7 @@
     <div class="container">
         <div class="navbar-header">
             <img th:src="@{/images/logo.png}" alt="logo" style="height: 30px; margin-right: 10px;"> <!-- добавляем логотип -->
-            <a class="navbar-brand" href="/static">Call-центр</a>
+            <a class="navbar-brand" href="/">Call-центр</a>
         </div>
         <ul class="navbar-nav ml-auto">
             <li style="display: flex; align-items: center;" class="nav-item">
@@ -44,7 +44,7 @@
     <div class="mt-5 card card-body bg-light">
 
 <!--        TODO тут проблема с секьюрити т.к. без аторизации запрос отправляем-->
-        <form action="/templates/customer/save" th:action="@{/templates/customer/save}" th:object="${requestDto}" class="form" method="post">
+        <form action="/customer/save" th:action="@{/customer/save}" th:object="${requestDto}" class="form" method="post">
 
             <div class="alert alert-danger" th:if="${! #fields.errors('all').isEmpty()}">
                 <li th:each="e : ${#fields.detailedErrors()}" th:class="${e.global}? globalerr : fielderr">
