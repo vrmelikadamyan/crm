@@ -1,3 +1,4 @@
+SET NAMES utf8;
 insert into user (id, username, full_name, email_address, address, city, country, phone_number) values (1, 'test1', 'Белов Алексей Иванович', 'bvelez0@google.pl', '4747 Butternut Crossing', 'Pestovo', 'Russia', '+7 (584) 984-8612');
 insert into user (id, username, full_name, email_address, address, city, country, phone_number) values (2, 'test2', 'Иванов Иван Иванович', 'mhaydn1@multiply.com', '713 Maple Wood Circle', 'Carmen', 'Philippines', '+63 (477) 280-2056');
 insert into user (id, username, full_name, email_address, address, city, country, phone_number) values (3, 'test3', 'Рыбкин Алексей Петрович', 'mpawelek2@state.gov', '034 Mariners Cove Point', 'Itaberaí', 'Brazil', '+55 (445) 165-2033');
