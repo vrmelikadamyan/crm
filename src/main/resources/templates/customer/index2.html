@@ -16,7 +16,7 @@
 <nav class="navbar navbar-dark bg-dark fixed-top">
     <div class="container">
         <div class="navbar-header">
-            <a class="navbar-brand" href="/">Call-центр</a>
+            <a class="navbar-brand" href="/static">Call-центр</a>
         </div>
     </div>
 </nav>
@@ -25,7 +25,7 @@
     <h1 class="pb-2 border-bottom row">
         <span class="col-sm-6 pb-4">Заявки</span>
         <span class="col-sm-6 text-sm-right pb-4">
-            <a href="/customer/create" class="btn btn-primary btn-outline-primary d-block d-sm-inline-block">Добавить абонента</a>
+            <a href="/templates/customer/create" class="btn btn-primary btn-outline-primary d-block d-sm-inline-block">Добавить абонента</a>
         </span>
     </h1>
 
@@ -78,19 +78,19 @@
         {
           "data": "id",
           "render": function (data, type, row, meta) {
-            return '<a href="/customer/edit/' + row.id + '">' + data + '</a>';
+            return '<a href=' + row.id + '"/templates/customer/edit/">' + data + '</a>';
           }
         },
         {
           "data": "firstName",
           "render": function (data, type, row, meta) {
-            return '<a href="/customer/edit/' + row.id + '">' + data + '</a>';
+            return '<a href=' + row.id + '"/templates/customer/edit/">' + data + '</a>';
           }
         },
         {
           "data": "lastName",
           "render": function (data, type, row, meta) {
-            return '<a href="/customer/edit/' + row.id + '">' + data + '</a>';
+            return '<a href=' + row.id + '"/templates/customer/edit/">' + data + '</a>';
           }
         },
         {"data": "emailAddress"},

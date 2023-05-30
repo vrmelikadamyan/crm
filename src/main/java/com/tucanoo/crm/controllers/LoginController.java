@@ -15,10 +15,10 @@ import org.springframework.web.bind.annotation.RestController;
 public class LoginController {
     private final CustomerRepository customerRepository;
 
-//    @GetMapping("/login")
-//    public String signIn(Model model) {
-//        return "login";
-//    }
+    @GetMapping("/login")
+    public String signIn(Model model) {
+        return "login";
+    }
 
     @GetMapping("/")
     public String index(Model model, Authentication authentication) {

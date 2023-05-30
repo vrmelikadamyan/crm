@@ -20,7 +20,7 @@
     <div class="container">
         <div class="navbar-header">
             <img th:src="@{/images/logo.png}" alt="logo" style="height: 30px; margin-right: 10px;"> <!-- добавляем логотип -->
-            <a class="navbar-brand" href="/">Call-центр</a>
+            <a class="navbar-brand" href="/static">Call-центр</a>
         </div>
         <ul class="navbar-nav ml-auto">
             <li style="display: flex; align-items: center;" class="nav-item">
@@ -39,7 +39,7 @@
     <h1 class="pb-2 border-bottom row">
         <span class="col-sm-6 pb-4">Заявка №: <span th:text="${requestInstance.id}"></span> </span>
         <span class="col-sm-6 text-sm-right pb-4">
-            <form action="/customer/delete" th:action="@{/customer/delete}" method="post" onsubmit="return confirm('Вы уверены?');">
+            <form action="/templates/customer/delete" th:action="@{/templates/customer/delete}" method="post" onsubmit="return confirm('Вы уверены?');">
                 <input type="hidden" name="id" th:value="${requestInstance.id}"/>
                 <button class="btn btn-danger btn-outline-danger d-block d-sm-inline-block">Удалить заявку</button>
             </form>
@@ -49,7 +49,7 @@
 
     <div class="mt-5 card card-body bg-light">
 
-        <form action="/customer/update" th:action="@{/customer/update}" th:object="${requestInstance}" class="form" method="post">
+        <form action="/templates/customer/update" th:action="@{/templates/customer/update}" th:object="${requestInstance}" class="form" method="post">
 
             <div class="alert alert-danger" th:if="${! #fields.errors('all').isEmpty()}">
                 <li th:each="e : ${#fields.detailedErrors()}" th:class="${e.global}? globalerr : fielderr">

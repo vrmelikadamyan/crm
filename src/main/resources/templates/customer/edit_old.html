@@ -11,7 +11,7 @@
 <nav class="navbar navbar-dark bg-dark fixed-top">
     <div class="container">
         <div class="navbar-header">
-            <a class="navbar-brand" href="/">Simple CRM</a>
+            <a class="navbar-brand" href="/static">Simple CRM</a>
         </div>
     </div>
 </nav>
@@ -20,7 +20,7 @@
     <h1 class="pb-2 border-bottom row">
         <span class="col-sm-6 pb-4">Customer: <span th:text="${customerInstance.id}"></span> </span>
         <span class="col-sm-6 text-sm-right pb-4">
-            <form action="/customer/delete" method="post" onsubmit="return confirm('Are you sure?');">
+            <form action="/templates/customer/delete" method="post" onsubmit="return confirm('Are you sure?');">
                 <input type="hidden" name="id" th:value="${customerInstance.id}"/>
                 <button class="btn btn-danger btn-outline-danger d-block d-sm-inline-block">Delete Customer</button>
             </form>
@@ -30,7 +30,7 @@
 
     <div class="mt-5 card card-body bg-light">
 
-        <form action="/customer/update" th:object="${customerInstance}" class="form" method="post">
+        <form action="/templates/customer/update" th:object="${customerInstance}" class="form" method="post">
 
             <div class="alert alert-danger" th:if="${! #fields.errors('all').isEmpty()}">
                 <li th:each="e : ${#fields.detailedErrors()}" th:class="${e.global}? globalerr : fielderr">

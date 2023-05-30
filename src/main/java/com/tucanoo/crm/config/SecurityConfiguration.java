@@ -73,7 +73,8 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 //                .anyRequest().authenticated()
                 .and()
                 .formLogin()
-//                .loginPage("/login") // URL нашей формы авторизации
+                .loginPage("/login")
+                .usernameParameter("username")
                 .permitAll()
 //                .successForwardUrl("/index")
                 .and()
